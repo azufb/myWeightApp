@@ -1,8 +1,11 @@
 import { useForm, Controller } from 'react-hook-form';
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import ja from 'date-fns/locale/ja';
 
 // react-datepicker用CSS
 import 'react-datepicker/dist/react-datepicker.css';
+
+registerLocale('ja', ja);
 
 const RecordingForm = () => {
   const { register, handleSubmit, reset, control } = useForm();
@@ -19,7 +22,7 @@ const RecordingForm = () => {
         name='date'
         control={control}
         render={({ field: { onChange, value } }) => (
-          <DatePicker selected={value} onChange={onChange} />
+          <DatePicker selected={value} onChange={onChange} locale={ja} />
         )}
       />
       <label htmlFor='weight'>Weight: </label>
