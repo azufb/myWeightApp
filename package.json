@@ -24,6 +24,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@types/react-datepicker": "^4.10.0",
     "react-datepicker": "^4.11.0"
   },
   "eslintConfig": {
