@@ -2,8 +2,6 @@ import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 import data from '../../sampleData/sampleData';
 
 const SampleGraph = () => {
-  console.log(data);
-  console.log(new Date(new Date('2023-04-01').getTime()).toLocaleDateString());
   return (
     <div>
       <LineChart width={400} height={150} data={data}>
