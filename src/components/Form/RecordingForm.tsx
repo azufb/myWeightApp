@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ja from 'date-fns/locale/ja';
@@ -6,12 +7,22 @@ import putCommandFunc from '../../aws/putCommandFunc';
 
 // react-datepicker用CSS
 import 'react-datepicker/dist/react-datepicker.css';
+import scanItemsFunc from '../../aws/scanItemsFunc';
 
 // DatePicker用にロケーションをjaにセット
 registerLocale('ja', ja);
 
 const RecordingForm = () => {
   const { register, handleSubmit, reset, control } = useForm();
+
+  useEffect(() => {
+    const getTableInfo = async () => {
+      const data = await scanItemsFunc();
+      console.log(data);
+    };
+
+    getTableInfo();
+  }, []);
 
   const onSubmit = (data: any) => {
     // 日付フォーマット
