@@ -8,23 +8,33 @@ import putCommandFunc from '../../aws/putCommandFunc';
 // react-datepicker用CSS
 import 'react-datepicker/dist/react-datepicker.css';
 import scanItemsFunc from '../../aws/scanItemsFunc';
+import { useRecoilState } from 'recoil';
+import { dynamoDbItemCountAtom } from '../../recoil/atom';
 
 // DatePicker用にロケーションをjaにセット
 registerLocale('ja', ja);
 
 const RecordingForm = () => {
+  const [itemCount, setItemCount] = useRecoilState(dynamoDbItemCountAtom);
   const { register, handleSubmit, reset, control } = useForm();
 
   useEffect(() => {
     const getTableInfo = async () => {
       const data = await scanItemsFunc();
       console.log(data);
+
+      if (data?.Count !== undefined) {
+        setItemCount(data?.Count);
+      }
     };
 
     getTableInfo();
   }, []);
 
   const onSubmit = (data: any) => {
+    // idを現在のアイテム数に応じて対応
+    const id: number = itemCount === 0 ? 1 : itemCount + 1;
+
     // 日付フォーマット
     const date: Date = new Date(data.date);
     const dataYear: number = date.getFullYear();
@@ -43,6 +53,7 @@ const RecordingForm = () => {
 
     // DynamoDBへ登録するために渡すオブジェクト
     const formData = {
+      id: id,
       date: formattedDate,
       weight: weightFloat,
       bmi: bmi,
