@@ -6,9 +6,9 @@ const putCommandFunc = async (formData: any) => {
     TableName: 'myWeightApp',
     Item: {
       id: 1,
-      date: new Date(),
-      weight: 42,
-      bmi: 17.7,
+      date: formData.date,
+      weight: formData.weight,
+      bmi: formData.bmi,
     },
   };
 
