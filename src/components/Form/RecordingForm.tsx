@@ -13,6 +13,8 @@ const RecordingForm = () => {
   const onSubmit = (data: any) => {
     console.log(data);
 
+    // dynamoDBへ登録
+
     reset();
   };
 
