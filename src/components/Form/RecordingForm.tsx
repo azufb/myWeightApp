@@ -31,7 +31,7 @@ const RecordingForm = () => {
     getTableInfo();
   }, []);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     // idを現在のアイテム数に応じて対応
     const id: number = itemCount === 0 ? 1 : itemCount + 1;
 
@@ -59,9 +59,9 @@ const RecordingForm = () => {
       bmi: bmi,
     };
 
-    console.log(formData);
-
     // DynamoDBへ登録する関数実行
+    const result = await putCommandFunc(formData);
+    console.log(result);
 
     // フォームリセット
     reset();
