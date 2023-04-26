@@ -5,4 +5,9 @@ const dynamoDbItemCountAtom = atom({
   default: 0,
 });
 
-export { dynamoDbItemCountAtom };
+const dynamoDBItemListAtom = atom({
+  key: 'dynamoDBItemListAtom',
+  default: [],
+});
+
+export { dynamoDbItemCountAtom, dynamoDBItemListAtom };
