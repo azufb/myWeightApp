@@ -1,5 +1,3 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import RecordingForm from './components/Form/RecordingForm';
 import SampleGraph from './components/Graph/SampleGraph';
