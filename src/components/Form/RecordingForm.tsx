@@ -29,7 +29,7 @@ const RecordingForm = () => {
     };
 
     getTableInfo();
-  }, []);
+  });
 
   const onSubmit = async (data: any) => {
     // idを現在のアイテム数に応じて対応
