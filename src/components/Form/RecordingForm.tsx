@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ja from 'date-fns/locale/ja';
@@ -7,40 +6,31 @@ import putCommandFunc from '../../aws/putCommandFunc';
 
 // react-datepicker用CSS
 import 'react-datepicker/dist/react-datepicker.css';
-import scanItemsFunc from '../../aws/scanItemsFunc';
-import { useRecoilState } from 'recoil';
-import { dynamoDbItemCountAtom } from '../../recoil/atom';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 
 // DatePicker用にロケーションをjaにセット
 registerLocale('ja', ja);
 
 const RecordingForm = () => {
-  const [itemCount, setItemCount] = useRecoilState(dynamoDbItemCountAtom);
   const { register, handleSubmit, reset, control } = useForm();
 
-  useEffect(() => {
-    let ignore = false;
+  // React Queryでキャッシュしたデータを取得
+  const queryClient = useQueryClient();
+  const queryData: any = queryClient.getQueryData(['data']);
 
-    const getTableInfo = async () => {
-      const data = await scanItemsFunc();
-      console.log(data);
-
-      if (data?.Count !== undefined && ignore === false) {
-        setItemCount(data?.Count);
-      }
-    };
-
-    getTableInfo();
-
-    // クリーンアップ関数で2回目の実行結果を無視する
-    return () => {
-      ignore = true;
-    };
+  const mutation = useMutation({
+    mutationFn: (formData: any) => {
+      return putCommandFunc(formData);
+    },
+    onSettled: () => {
+      // データ再フェッチのトリガーとなる
+      queryClient.invalidateQueries(['data']);
+    },
   });
 
   const onSubmit = async (data: any) => {
     // idを現在のアイテム数に応じて対応
-    const id: number = itemCount === 0 ? 1 : itemCount + 1;
+    const id: number = queryData.Count === 0 ? 1 : queryData.Count + 1;
 
     // 日付フォーマット
     const date: Date = new Date(data.date);
@@ -67,8 +57,7 @@ const RecordingForm = () => {
     };
 
     // DynamoDBへ登録する関数実行
-    const result = await putCommandFunc(formData);
-    console.log(result);
+    mutation.mutate(formData);
 
     // フォームリセット
     reset();
