@@ -10,6 +10,8 @@ const scanItemsFunc = async () => {
     const data: ScanCommandOutput = await ddbDocClient.send(
       new ScanCommand(param)
     );
+    // ここで日付順になるようソートする
+    data.Items?.sort();
     return data;
   } catch (err) {
     console.log('err', err);
