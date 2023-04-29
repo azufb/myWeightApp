@@ -39,7 +39,7 @@ const RecordingForm = () => {
     const dataDate: number = date.getDate();
     const formattedDate: string = format(
       new Date(dataYear, dataMonth, dataDate),
-      'yyyy/MM/dd'
+      'yyyy-MM-dd'
     );
 
     // 体重
@@ -50,8 +50,8 @@ const RecordingForm = () => {
 
     // DynamoDBへ登録するために渡すオブジェクト
     const formData = {
-      id: id,
       date: formattedDate,
+      timestamp: date.getTime(),
       weight: weightFloat,
       bmi: bmi,
     };
