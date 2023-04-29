@@ -1,9 +1,14 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 
 const Graph = () => {
+  // React Queryでキャッシュしたデータを取得
+  const queryClient = useQueryClient();
+  const queryData: any = queryClient.getQueryData(['data']);
+
   return (
     <div>
-      <LineChart width={400} height={150}>
+      <LineChart width={400} height={150} data={queryData?.Items}>
         <XAxis
           dataKey='date'
           interval={0}
