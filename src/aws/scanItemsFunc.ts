@@ -3,7 +3,7 @@ import { ddbDocClient } from './ddbDocClient';
 
 const scanItemsFunc = async () => {
   const param = {
-    TableName: 'myWeightApp',
+    TableName: 'myWeightData',
   };
 
   try {
