@@ -10,7 +10,6 @@ const scanItemsFunc = async () => {
     const data: ScanCommandOutput = await ddbDocClient.send(
       new ScanCommand(param)
     );
-    console.log(data);
     return data;
   } catch (err) {
     console.log('err', err);
