@@ -3,6 +3,7 @@ import RecordingForm from './components/Form/RecordingForm';
 import SampleGraph from './components/Graph/SampleGraph';
 import { useQuery } from '@tanstack/react-query';
 import scanItemsFunc from './aws/scanItemsFunc';
+import Graph from './components/Graph/Graph';
 
 const App = () => {
   const { isLoading, error, data } = useQuery({
@@ -17,6 +18,7 @@ const App = () => {
       <header className='App-header'>
         <RecordingForm />
         <SampleGraph />
+        <Graph />
       </header>
     </div>
   );
