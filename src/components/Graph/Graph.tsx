@@ -21,11 +21,11 @@ const Graph = () => {
           domain={['dataMin', 'dataMax']}
           tickFormatter={(unix) => new Date(unix).toLocaleDateString()}
         />
-        <YAxis dataKey='weight' />
-        <YAxis dataKey='bmi' />
+        <YAxis yAxisId={1} dataKey='weight' />
+        {/*<YAxis yAxisId={2} dataKey='bmi' orientation='right' />*/}
         <Tooltip />
-        <Line type='monotone' dataKey='weight' />
-        <Line type='monotone' dataKey='bmi' />
+        <Line yAxisId={1} type='monotone' dataKey='weight' />
+        {/*<Line yAxisId={2} type='monotone' dataKey='bmi' />*/}
       </LineChart>
     </div>
   );
