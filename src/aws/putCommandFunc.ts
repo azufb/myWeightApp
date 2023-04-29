@@ -5,8 +5,8 @@ const putCommandFunc = async (formData: any) => {
   const params = {
     TableName: 'myWeightData',
     Item: {
-      id: formData.id,
       date: formData.date,
+      timestamp: formData.timestamp,
       weight: formData.weight,
       bmi: formData.bmi,
     },
