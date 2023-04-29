@@ -22,8 +22,10 @@ const Graph = () => {
           tickFormatter={(unix) => new Date(unix).toLocaleDateString()}
         />
         <YAxis dataKey='weight' />
+        <YAxis dataKey='bmi' />
         <Tooltip />
         <Line type='monotone' dataKey='weight' />
+        <Line type='monotone' dataKey='bmi' />
       </LineChart>
     </div>
   );
