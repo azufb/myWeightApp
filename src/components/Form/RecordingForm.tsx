@@ -19,16 +19,23 @@ const RecordingForm = () => {
   const { register, handleSubmit, reset, control } = useForm();
 
   useEffect(() => {
+    let ignore = false;
+
     const getTableInfo = async () => {
       const data = await scanItemsFunc();
       console.log(data);
 
-      if (data?.Count !== undefined) {
+      if (data?.Count !== undefined && ignore === false) {
         setItemCount(data?.Count);
       }
     };
 
     getTableInfo();
+
+    // クリーンアップ関数で2回目の実行結果を無視する
+    return () => {
+      ignore = true;
+    };
   });
 
   const onSubmit = async (data: any) => {
