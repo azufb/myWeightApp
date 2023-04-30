@@ -11,8 +11,19 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 // DatePicker用にロケーションをjaにセット
 registerLocale('ja', ja);
 
+type FormValuesType = {
+  date: Date;
+  weight: string;
+};
+
 const RecordingForm = () => {
-  const { register, handleSubmit, reset, control } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm<FormValuesType>();
 
   // React Queryでキャッシュしたデータを取得
   const queryClient = useQueryClient();
@@ -65,15 +76,37 @@ const RecordingForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <label htmlFor='date'>日付: </label>
       <Controller
         name='date'
         control={control}
+        rules={{
+          required: '入力が必須の項目です。',
+        }}
         render={({ field: { onChange, value } }) => (
-          <DatePicker selected={value} onChange={onChange} locale={ja} />
+          <DatePicker
+            selected={value}
+            onChange={onChange}
+            locale={ja}
+            id='date'
+          />
         )}
       />
+      {errors.date?.message && <p>{errors.date.message}</p>}
+
       <label htmlFor='weight'>Weight: </label>
-      <input id='weight' {...register('weight')} />
+      <input
+        id='weight'
+        type='number'
+        {...register('weight', {
+          required: '入力が必須の項目です。',
+          pattern: {
+            value: /[0-9]/,
+            message: '数字で入力して下さい。',
+          },
+        })}
+      />
+      {errors.weight?.message && <p>{errors.weight.message}</p>}
 
       <input type='submit' />
     </form>
