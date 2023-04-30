@@ -106,6 +106,7 @@ const RecordingForm = () => {
           },
         })}
       />
+      <span>kg</span>
       {errors.weight?.message && <p>{errors.weight.message}</p>}
 
       <input type='submit' />
