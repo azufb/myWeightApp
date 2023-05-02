@@ -3,13 +3,15 @@ import { ddbDocClient } from './ddbDocClient';
 
 const scanItemsFunc = async () => {
   const param = {
-    TableName: 'myWeightApp',
+    TableName: 'myWeightData',
   };
 
   try {
     const data: ScanCommandOutput = await ddbDocClient.send(
       new ScanCommand(param)
     );
+    // ここで日付順になるようソートする
+    data.Items?.sort();
     return data;
   } catch (err) {
     console.log('err', err);

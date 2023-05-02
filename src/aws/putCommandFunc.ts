@@ -3,10 +3,10 @@ import { ddbDocClient } from './ddbDocClient';
 
 const putCommandFunc = async (formData: any) => {
   const params = {
-    TableName: 'myWeightApp',
+    TableName: 'myWeightData',
     Item: {
-      id: formData.id,
       date: formData.date,
+      timestamp: formData.timestamp,
       weight: formData.weight,
       bmi: formData.bmi,
     },
