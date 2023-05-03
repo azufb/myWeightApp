@@ -31,7 +31,14 @@ const RecordingForm = () => {
 
   const mutation = useMutation({
     mutationFn: (formData: any) => {
-      return putCommandFunc(formData);
+      console.log(formData);
+      return fetch('http://localhost:9000/addItem', {
+        method: 'POST',
+        // リクエストボディを渡すために、JSONであることを伝える必要がある
+        // ないと、空のオブジェクトになってしまう
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
     },
     onSettled: () => {
       // データ再フェッチのトリガーとなる
