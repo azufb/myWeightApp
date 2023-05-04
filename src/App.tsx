@@ -5,7 +5,7 @@ import Graph from './components/Graph/Graph';
 import getData from './ts/getData';
 
 const App = (): JSX.Element => {
-  const { isLoading, error, data } = useQuery({
+  const { data } = useQuery({
     queryKey: ['data'],
     queryFn: getData,
   });
@@ -16,7 +16,8 @@ const App = (): JSX.Element => {
     <div className='App'>
       <header className='App-header'>
         <RecordingForm />
-        <Graph />
+        {/* データがあればグラフを表示し、データがなければ、メッセージを表示する。 */}
+        {data?.Count === 0 ? <p>データがありません。</p> : <Graph />}
       </header>
     </div>
   );
