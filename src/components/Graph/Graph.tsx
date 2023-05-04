@@ -1,10 +1,13 @@
-import { useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
+import { GetResultDataType } from '../../types/GetResultDataType';
 
 const Graph = () => {
   // React Queryでキャッシュしたデータを取得
-  const queryClient = useQueryClient();
-  const queryData: any = queryClient.getQueryData(['data']);
+  const queryClient: QueryClient = useQueryClient();
+  const queryData: GetResultDataType | undefined = queryClient.getQueryData([
+    'data',
+  ]);
 
   return (
     <div>

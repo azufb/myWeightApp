@@ -5,7 +5,11 @@ import { format } from 'date-fns';
 
 // react-datepicker用CSS
 import 'react-datepicker/dist/react-datepicker.css';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
+import {
+  useQueryClient,
+  useMutation,
+  QueryClient,
+} from '@tanstack/react-query';
 import putData from '../../ts/putData';
 import { FormDataType } from '../../types/FormDataType';
 
@@ -26,7 +30,7 @@ const RecordingForm = (): JSX.Element => {
     formState: { errors },
   } = useForm<FormValuesType>();
 
-  const queryClient = useQueryClient();
+  const queryClient: QueryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (formData: FormDataType) => putData(formData),
