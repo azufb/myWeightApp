@@ -7,6 +7,7 @@ import putCommandFunc from '../../aws/putCommandFunc';
 // react-datepicker用CSS
 import 'react-datepicker/dist/react-datepicker.css';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
+import putData from '../../ts/putData';
 
 // DatePicker用にロケーションをjaにセット
 registerLocale('ja', ja);
@@ -16,7 +17,7 @@ type FormValuesType = {
   weight: string;
 };
 
-const RecordingForm = () => {
+const RecordingForm = (): JSX.Element => {
   const {
     register,
     handleSubmit,
@@ -30,16 +31,7 @@ const RecordingForm = () => {
   const queryData: any = queryClient.getQueryData(['data']);
 
   const mutation = useMutation({
-    mutationFn: (formData: any) => {
-      console.log(formData);
-      return fetch('http://localhost:9000/addItem', {
-        method: 'POST',
-        // リクエストボディを渡すために、JSONであることを伝える必要がある
-        // ないと、空のオブジェクトになってしまう
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-    },
+    mutationFn: (formData: any) => putData(formData),
     onSettled: () => {
       // データ再フェッチのトリガーとなる
       queryClient.invalidateQueries(['data']);
