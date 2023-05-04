@@ -5,12 +5,7 @@ import { format } from 'date-fns';
 
 // react-datepicker用CSS
 import 'react-datepicker/dist/react-datepicker.css';
-import {
-  useQueryClient,
-  useMutation,
-  UseMutationResult,
-  MutationFunction,
-} from '@tanstack/react-query';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 import putData from '../../ts/putData';
 import { FormDataType } from '../../types/FormDataType';
 
