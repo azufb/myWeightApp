@@ -2,12 +2,17 @@ import { useForm, Controller } from 'react-hook-form';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ja from 'date-fns/locale/ja';
 import { format } from 'date-fns';
-import putCommandFunc from '../../aws/putCommandFunc';
 
 // react-datepicker用CSS
 import 'react-datepicker/dist/react-datepicker.css';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
+import {
+  useQueryClient,
+  useMutation,
+  UseMutationResult,
+  MutationFunction,
+} from '@tanstack/react-query';
 import putData from '../../ts/putData';
+import { FormDataType } from '../../types/FormDataType';
 
 // DatePicker用にロケーションをjaにセット
 registerLocale('ja', ja);
@@ -26,22 +31,17 @@ const RecordingForm = (): JSX.Element => {
     formState: { errors },
   } = useForm<FormValuesType>();
 
-  // React Queryでキャッシュしたデータを取得
   const queryClient = useQueryClient();
-  const queryData: any = queryClient.getQueryData(['data']);
 
   const mutation = useMutation({
-    mutationFn: (formData: any) => putData(formData),
+    mutationFn: (formData: FormDataType) => putData(formData),
     onSettled: () => {
       // データ再フェッチのトリガーとなる
       queryClient.invalidateQueries(['data']);
     },
   });
 
-  const onSubmit = async (data: any) => {
-    // idを現在のアイテム数に応じて対応
-    const id: number = queryData.Count === 0 ? 1 : queryData.Count + 1;
-
+  const onSubmit = async (data: any): Promise<void> => {
     // 日付フォーマット
     const date: Date = new Date(data.date);
     const dataYear: number = date.getFullYear();
@@ -59,7 +59,7 @@ const RecordingForm = (): JSX.Element => {
     const bmi: number = Math.round((weightFloat / 2.365444) * 100) / 100;
 
     // DynamoDBへ登録するために渡すオブジェクト
-    const formData = {
+    const formData: FormDataType = {
       date: formattedDate,
       timestamp: date.getTime(),
       weight: weightFloat,

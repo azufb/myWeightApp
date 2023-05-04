@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import Graph from './components/Graph/Graph';
 import getData from './ts/getData';
 
-const App = () => {
+const App = (): JSX.Element => {
   const { isLoading, error, data } = useQuery({
     queryKey: ['data'],
     queryFn: getData,
