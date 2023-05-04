@@ -1,10 +1,11 @@
 import RecordingForm from './components/Form/RecordingForm';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import Graph from './components/Graph/Graph';
 import getData from './ts/getData';
+import { GetResultDataType } from './types/GetResultDataType';
 
 const App = (): JSX.Element => {
-  const { data } = useQuery({
+  const { data }: UseQueryResult<GetResultDataType | undefined> = useQuery({
     queryKey: ['data'],
     queryFn: getData,
   });
