@@ -40,7 +40,7 @@ const RecordingForm = (): JSX.Element => {
     },
   });
 
-  const onSubmit = async (data: any): Promise<void> => {
+  const onSubmit = async (data: FormValuesType): Promise<void> => {
     // 日付フォーマット
     const date: Date = new Date(data.date);
     const dataYear: number = date.getFullYear();
@@ -95,11 +95,10 @@ const RecordingForm = (): JSX.Element => {
       <label htmlFor='weight'>Weight: </label>
       <input
         id='weight'
-        type='number'
         {...register('weight', {
           required: '入力が必須の項目です。',
           pattern: {
-            value: /[0-9]/,
+            value: /(\d)?(.)?\d/,
             message: '数字で入力して下さい。',
           },
         })}
