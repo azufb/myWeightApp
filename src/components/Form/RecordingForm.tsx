@@ -13,6 +13,8 @@ import {
 import putData from '../../ts/putData';
 import { FormDataType } from '../../types/FormDataType';
 
+import styles from './style/style.module.scss';
+
 // DatePicker用にロケーションをjaにセット
 registerLocale('ja', ja);
 
@@ -73,41 +75,66 @@ const RecordingForm = (): JSX.Element => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor='date'>日付: </label>
-      <Controller
-        name='date'
-        control={control}
-        rules={{
-          required: '入力が必須の項目です。',
-        }}
-        render={({ field: { onChange, value } }) => (
-          <DatePicker
-            selected={value}
-            onChange={onChange}
-            locale={ja}
-            id='date'
+    <div className={styles.container}>
+      <h2 className={styles.title}>フォーム</h2>
+      <form>
+        <div className={styles.form}>
+          <label htmlFor='date' className={styles.formLabel}>
+            Date
+          </label>
+          <Controller
+            name='date'
+            control={control}
+            rules={{
+              required: '入力が必須の項目です。',
+            }}
+            render={({ field: { onChange, value } }) => (
+              <DatePicker
+                selected={value}
+                onChange={onChange}
+                locale={ja}
+                id='date'
+                placeholderText='日付を選択してください'
+              />
+            )}
           />
-        )}
-      />
-      {errors.date?.message && <p>{errors.date.message}</p>}
+          {errors.date?.message && (
+            <span className={styles.validationErrorText}>
+              {errors.date.message}
+            </span>
+          )}
+        </div>
 
-      <label htmlFor='weight'>Weight: </label>
-      <input
-        id='weight'
-        {...register('weight', {
-          required: '入力が必須の項目です。',
-          pattern: {
-            value: /(\d)?(.)?\d/,
-            message: '数字で入力して下さい。',
-          },
-        })}
-      />
-      <span>kg</span>
-      {errors.weight?.message && <p>{errors.weight.message}</p>}
+        <div className={styles.form}>
+          <label htmlFor='weight' className={styles.formLabel}>
+            Weight
+          </label>
+          <input
+            id='weight'
+            placeholder='入力してください'
+            {...register('weight', {
+              required: '入力が必須の項目です。',
+              pattern: {
+                value: /(\d)?(.)?\d/,
+                message: '半角数字で入力して下さい。',
+              },
+            })}
+          />
+          <span className={styles.formUnit}>kg</span>
+          {errors.weight?.message && (
+            <span className={styles.validationErrorText}>
+              {errors.weight.message}
+            </span>
+          )}
+        </div>
 
-      <input type='submit' />
-    </form>
+        <div className={styles.btnArea}>
+          <button onClick={handleSubmit(onSubmit)} className={styles.submitBtn}>
+            追加する
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

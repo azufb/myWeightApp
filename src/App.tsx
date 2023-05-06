@@ -3,6 +3,7 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import Graph from './components/Graph/Graph';
 import getData from './ts/getData';
 import { GetResultDataType } from './types/GetResultDataType';
+import styles from './appStyle.module.scss';
 
 const App = (): JSX.Element => {
   const { data }: UseQueryResult<GetResultDataType | undefined> = useQuery({
@@ -10,10 +11,8 @@ const App = (): JSX.Element => {
     queryFn: getData,
   });
 
-  console.log(data);
-
   return (
-    <div>
+    <div className={styles.container}>
       <div>
         <RecordingForm />
         {/* データがあればグラフを表示し、データがなければ、メッセージを表示する。 */}

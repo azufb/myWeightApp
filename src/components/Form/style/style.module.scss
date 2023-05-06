@@ -1,0 +1,35 @@
+.container {
+  width: 500px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+  .title {
+    margin: 0.25rem 0;
+  }
+  .form {
+    width: fit-content;
+    text-align: left;
+    padding-bottom: 0.5rem;
+  }
+  .formLabel {
+    display: block;
+    font-weight: bold;
+  }
+  .formUnit {
+    padding-left: 0.25rem;
+    font-weight: bold;
+  }
+  .validationErrorText {
+    display: block;
+    color: red;
+  }
+  .btnArea {
+    padding-top: 0.5rem;
+  }
+  .submitBtn {
+    padding: 0.25rem 0.5rem;
+    border-width: 2px 4px 4px 2px;
+    border-color: #5c98c8;
+    border-radius: 15px;
+    background-color: #e9e7e7;
+  }
+}

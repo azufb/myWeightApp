@@ -1,0 +1,14 @@
+.container {
+  width: 500px;
+  margin: 0 auto;
+  .title {
+    margin: 0.25rem;
+  }
+  .graph {
+    width: 100%;
+    overflow-x: scroll;
+  }
+  .annotation {
+    margin-bottom: 0;
+  }
+}
