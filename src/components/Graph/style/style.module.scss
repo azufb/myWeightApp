@@ -1,8 +1,6 @@
 .container {
-  width: 500px;
-  margin: 0 auto;
   .title {
-    margin: 0.25rem;
+    margin: 0.25rem 0;
   }
   .graph {
     width: 100%;
@@ -10,5 +8,6 @@
   }
   .annotation {
     margin-bottom: 0;
+    font-size: 0.75rem;
   }
 }
