@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import { GetResultDataType } from '../types/GetResultDataType';
 
 const getData = async (): Promise<GetResultDataType> => {
-  const result: AxiosResponse = await axiosInstance.get('/getItems');
+  const result: AxiosResponse = await axiosInstance.get('/dynamoDB/getItems');
   const resultData: GetResultDataType = result.data;
   return resultData;
 };
