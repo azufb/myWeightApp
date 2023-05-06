@@ -1,4 +1,13 @@
 .container {
-  padding: 2.5rem;
+  padding: 2rem;
   margin: -8px;
+  .contents {
+    width: 500px;
+    margin: 0 auto;
+  }
+  .dataCount {
+    margin-bottom: 2rem;
+    position: absolute;
+    bottom: 0;
+  }
 }

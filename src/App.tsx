@@ -13,10 +13,10 @@ const App = (): JSX.Element => {
 
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.contents}>
         <RecordingForm />
-        {/* データがあればグラフを表示し、データがなければ、メッセージを表示する。 */}
-        {data?.Count === 0 ? <p>データがありません。</p> : <Graph />}
+        <Graph />
+        <p className={styles.dataCount}>現在のデータ数：{data?.Count}個</p>
       </div>
     </div>
   );
