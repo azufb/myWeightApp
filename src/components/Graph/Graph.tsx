@@ -13,7 +13,7 @@ import styles from './style/style.module.scss';
 const Graph = (): JSX.Element => {
   // React Queryでキャッシュしたデータを取得
   const queryClient: QueryClient = useQueryClient();
-  const queryKey = ['data'];
+  const queryKey: string[] = ['data'];
   const queryData: GetResultDataType | undefined =
     queryClient.getQueryData(queryKey);
 
