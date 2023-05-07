@@ -53,6 +53,8 @@ const RecordingForm = (): JSX.Element => {
       'yyyy/MM/dd'
     );
 
+    const timestamp: number = date.getTime();
+
     // 体重
     const weightFloat: number = parseFloat(data.weight);
 
@@ -62,7 +64,7 @@ const RecordingForm = (): JSX.Element => {
     // DynamoDBへ登録するために渡すオブジェクト
     const formData: FormDataType = {
       date: formattedDate,
-      timestamp: date.getTime(),
+      timestamp: timestamp,
       weight: weightFloat,
       bmi: bmi,
     };
