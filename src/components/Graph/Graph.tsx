@@ -10,7 +10,7 @@ import {
 import { GetResultDataType } from '../../types/GetResultDataType';
 import styles from './style/style.module.scss';
 
-const Graph = () => {
+const Graph = (): JSX.Element => {
   // React Queryでキャッシュしたデータを取得
   const queryClient: QueryClient = useQueryClient();
   const queryKey = ['data'];
