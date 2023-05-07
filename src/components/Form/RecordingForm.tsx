@@ -10,7 +10,7 @@ import {
   useMutation,
   QueryClient,
 } from '@tanstack/react-query';
-import putData from '../../ts/putData';
+import postData from '../../ts/postData';
 import { FormDataType } from '../../types/FormDataType';
 
 import styles from './style/style.module.scss';
@@ -35,7 +35,7 @@ const RecordingForm = (): JSX.Element => {
   const queryClient: QueryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (formData: FormDataType) => putData(formData),
+    mutationFn: (formData: FormDataType) => postData(formData),
     onSettled: () => {
       // データ再フェッチのトリガーとなる
       queryClient.invalidateQueries(['data']);
