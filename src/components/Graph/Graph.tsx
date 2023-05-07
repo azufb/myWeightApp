@@ -37,7 +37,7 @@ const Graph = (): JSX.Element => {
                   fontSize: 10,
                 }}
               />
-              <YAxis dataKey='weight' domain={[0, 100]} />
+              <YAxis dataKey='weight' domain={[30, 50]} />
               {/*<YAxis yAxisId={2} dataKey='bmi' orientation='right' />*/}
               <Tooltip />
               <Line type='monotone' strokeWidth={2} dataKey='weight' />
