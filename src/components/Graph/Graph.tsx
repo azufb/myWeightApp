@@ -13,9 +13,9 @@ import styles from './style/style.module.scss';
 const Graph = () => {
   // React Queryでキャッシュしたデータを取得
   const queryClient: QueryClient = useQueryClient();
-  const queryData: GetResultDataType | undefined = queryClient.getQueryData([
-    'data',
-  ]);
+  const queryKey = ['data'];
+  const queryData: GetResultDataType | undefined =
+    queryClient.getQueryData(queryKey);
 
   return (
     <div className={styles.container}>
