@@ -7,7 +7,6 @@ export type ResultMetadataType = {
 
 export type ResultItemsType = {
   date: string;
-  bmi: number;
   weight: number;
   timestamp: number;
 };

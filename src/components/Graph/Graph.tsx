@@ -38,10 +38,8 @@ const Graph = (): JSX.Element => {
                 }}
               />
               <YAxis dataKey='weight' domain={[30, 50]} />
-              {/*<YAxis yAxisId={2} dataKey='bmi' orientation='right' />*/}
               <Tooltip />
               <Line type='monotone' strokeWidth={2} dataKey='weight' />
-              {/*<Line yAxisId={2} type='monotone' dataKey='bmi' />*/}
             </LineChart>
           </div>
           <p className={styles.annotation}>※X軸スクロールできます。</p>

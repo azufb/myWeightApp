@@ -58,15 +58,11 @@ const RecordingForm = (): JSX.Element => {
     // 体重
     const weightFloat: number = parseFloat(data.weight);
 
-    // BMI計算(小数第2位まで表示)
-    const bmi: number = Math.round((weightFloat / 2.365444) * 100) / 100;
-
     // DynamoDBへ登録するために渡すオブジェクト
     const formData: FormDataType = {
       date: formattedDate,
       timestamp: timestamp,
       weight: weightFloat,
-      bmi: bmi,
     };
 
     // DynamoDBへ登録する関数実行
